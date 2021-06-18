@@ -1,3 +1,4 @@
+import { loadData } from './git';
 import { initApp } from './view/app';
 import { App } from './view/App';
 
@@ -8,3 +9,5 @@ App()
         document.getElementById('app').innerHTML = html as string;
         initApp();
     });
+
+loadData();

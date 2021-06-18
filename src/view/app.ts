@@ -1,5 +1,5 @@
-import { applyToChild, elByClass, elById } from '../utils/dom';
+import { initSettings } from "./Settings/settings";
 
 export function initApp() {
-
+    initSettings();
 }
