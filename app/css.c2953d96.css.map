@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,MACI,mBAAoB,CACpB,gBACJ,CAEA,KACI,sCAAyC,CACzC,QACJ","file":"css.c2953d96.css","sourceRoot":"../src","sourcesContent":[":root {\n    --light-border: #eee;\n    --grey-text: #666;\n}\n\nbody {\n    font-family: Arial, Helvetica, sans-serif;\n    margin: 0;\n}\n"]}
