@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "post commit hook"
+npm run build
+echo "build app from hook"
+git add ./app
+echo "add app to repo"

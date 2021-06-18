@@ -1,0 +1,9 @@
+:root {
+    --light-border: #eee;
+    --grey-text: #666;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
