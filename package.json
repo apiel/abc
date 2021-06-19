@@ -21,6 +21,7 @@
     "homepage": "https://github.com/apiel/abc#readme",
     "devDependencies": {
         "@types/node": "^14.14.25",
+        "http-server": "^0.12.3",
         "husky": "^5.0.9",
         "parcel-bundler": "^1.12.4",
         "typescript": "^4.1.3"
