@@ -7,7 +7,7 @@
     "scripts": {
         "postinstall": "husky install",
         "dev": "parcel src/index.html",
-        "build": "parcel build --public-url '.' --out-dir app src/index.html"
+        "build": "parcel build --public-url '.' --out-dir app src/index.html && cp ./manifest.json app/manifest.json"
     },
     "repository": {
         "type": "git",
