@@ -18,3 +18,8 @@ body {
     float: right;
     cursor: pointer;
 }
+
+#content {
+    width: 90%;
+    height: 90%;
+}
