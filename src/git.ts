@@ -1,16 +1,23 @@
+import { emitSetData } from './event';
+import { strongDecrypt, strongEncrypt } from './storage/crypt';
 import { GitHubStorage } from './storage/GitHubStorage';
 
 const gitHubStorage = new GitHubStorage();
 
 const file = 'data.yo';
 
+let data: string;
+
 export async function loadData() {
-    const data = await gitHubStorage.read(file);
-    // if (sequences && Array.isArray(sequences)) {
-    //     setSequences(sequences);
-    // }
+    const temp = (await gitHubStorage.read(file))?.toString();
+    if (temp) {
+        data = strongDecrypt(temp);
+        emitSetData(data);
+    }
 }
 
-export function saveData() {
-    return gitHubStorage.saveFile(file, 'some stuff to save');
+export function saveData(newData: string) {
+    data = newData;
+    // emitSetData(data); ??
+    return gitHubStorage.saveFile(file, strongEncrypt(data));
 }
