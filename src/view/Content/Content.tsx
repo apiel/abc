@@ -5,8 +5,12 @@ const React = fix;
 export function Content(): ElementNode {
     return (
         <div>
-            <textarea id="content"></textarea>
-            <button id="save-content">Save</button>
+            <div>
+                <textarea id="content"></textarea>
+            </div>
+            <div>
+                <button id="save-content">Save</button>
+            </div>
         </div>
     );
 }

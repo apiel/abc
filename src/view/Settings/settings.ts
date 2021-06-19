@@ -11,4 +11,5 @@ export function initSettings() {
     elById('githubRepo').onchange = evStrVal(storeGithubRepo);
     elById('githubToken').onchange = evStrVal(storeGithubToken);
     elById('secret').onchange = evStrVal(storeSecret);
+    elById('toggle-settings').onclick = () => elById('settings').classList.toggle('hide');
 }

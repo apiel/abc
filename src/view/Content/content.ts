@@ -8,6 +8,6 @@ export function initContent() {
     };
 
     onSetData((data) => {
-        elById('content').innerText = data;
+        inputById('content').value = data;
     });
 }
