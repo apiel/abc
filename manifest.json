@@ -3,5 +3,6 @@
     "theme_color": "#2196f3",
     "background_color": "#e4f3ff",
     "display": "standalone",
-    "start_url": "/app/index.html"
+    "start_url": "/app/index.html",
+    "lang": "en-US"
 }
