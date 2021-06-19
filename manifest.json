@@ -3,6 +3,5 @@
     "theme_color": "#2196f3",
     "background_color": "#e4f3ff",
     "display": "standalone",
-    "scope": "/",
-    "start_url": "/"
+    "start_url": "/app/index.html"
 }
