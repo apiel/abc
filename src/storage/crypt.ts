@@ -1,7 +1,7 @@
 import crypto from 'crypto-js';
 import { getSecret } from './localStorage';
 
-const secret = window.sessionStorage.getItem('secret');
+const secret = window.sessionStorage.getItem('secret') || window.localStorage.getItem('secret');
 
 export function encrypt(text: string) {
     return crypto.AES.encrypt(text, secret).toString();
