@@ -16,8 +16,10 @@
     </head>
     <body class="fullscreen">
         <div class="container">
-            <input type="password" onchange="window.sessionStorage.setItem('secret', this.value)" />
-            <a href="app/index.html">go go go</a>
+            <form action="app/index.html" method="GET">
+                <input type="password" onchange="window.sessionStorage.setItem('secret', this.value)" />
+                <button type="submit">go</button>
+            </form>
         </div>
     </body>
 </html>
