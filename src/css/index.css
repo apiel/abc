@@ -436,8 +436,8 @@ button.line-title-badge:hover,
 
 .raw-textarea {
     width: 100%;
-    min-height: 77vh;
-    height: 77vh;
+    min-height: 80vh;
+    height: 80vh;
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
