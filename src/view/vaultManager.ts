@@ -74,7 +74,7 @@ export function initVaultManager() {
 
 export function renderPlainTextLines() {
     const linesContainer = elById('plain-text-lines');
-    const lineCountBadge = elById('line-count-badge');
+
     if (!linesContainer) return;
 
     const allLines = rawTextData.split('\n');
@@ -141,10 +141,6 @@ export function renderPlainTextLines() {
         })
         .filter((html) => html !== '')
         .join('');
-
-    if (lineCountBadge) {
-        lineCountBadge.innerText = `${displayLinesCount} line${displayLinesCount === 1 ? '' : 's'}`;
-    }
 
     if (!renderedHtml) {
         linesContainer.innerHTML = `

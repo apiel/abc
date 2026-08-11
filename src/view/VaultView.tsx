@@ -27,11 +27,6 @@ export function VaultView(): ElementNode {
 
             {/* Interactive Plain Text View */}
             <div id="interactive-view" class="interactive-container">
-                <div style={{ marginBottom: '0.85rem', fontSize: '0.8rem', color: 'var(--text-dim)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span>First word = <strong>Highlighted Title</strong> • Click words to copy • Lines starting with <code>-</code> are plain text</span>
-                    <span id="line-count-badge" style={{ fontFamily: 'var(--font-mono)' }}>0 lines</span>
-                </div>
-
                 <div id="plain-text-lines" class="plain-text-lines">
                     {/* Dynamically populated line rows */}
                 </div>
