@@ -31,14 +31,16 @@ export async function loadData(): Promise<string> {
         console.warn('V2 file load check:', err);
     }
 
-    // Check if legacy data.yo exists on GitHub
+    // Check if legacy data.yo exists on GitHub and load it automatically
     try {
         const v1Content = (await gitHubStorage.read(FILE_V1))?.toString();
         if (v1Content && v1Content.trim()) {
-            emitMigrationAvailable(v1Content);
+            cachedVaultData = await strongDecryptV2(v1Content, masterSecret);
+            emitSetData(cachedVaultData);
+            return cachedVaultData;
         }
     } catch (err) {
-        console.log('No legacy v1 file found.');
+        console.log('No legacy v1 file found or decryption failed.');
     }
 
     return '';
