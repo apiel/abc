@@ -89,15 +89,6 @@ body {
     box-shadow: var(--shadow-glow);
 }
 
-.brand-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .badge-v2 {
     font-size: 0.7rem;
     font-weight: 600;
