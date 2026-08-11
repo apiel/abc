@@ -40,9 +40,6 @@ export function VaultView(): ElementNode {
             {/* Raw Textarea Editor Mode */}
             <div id="raw-editor-mode" class="raw-editor-container hide">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)' }}>
-                        Plain Text Editor (First word = Highlighted Title, <code>-</code> line = Plain text)
-                    </span>
                     <button id="save-content" class="btn btn-primary">
                         💾 Save to GitHub (data2.yo)
                     </button>

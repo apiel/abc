@@ -266,11 +266,33 @@ body {
     border-color: var(--border-highlight);
 }
 
-/* Comment lines starting with # */
+/* Comment lines starting with # - Completely unformatted plain text, no boxes, no border, no italic */
 .line-row.comment-line-row {
-    background: rgba(0, 0, 0, 0.15);
-    border-style: dashed;
-    border-color: rgba(255, 255, 255, 0.05);
+    background: transparent !important;
+    border: none !important;
+    padding: 0.35rem 0.5rem !important;
+}
+
+.clickable-word-chip.comment-word-chip {
+    font-family: var(--font-mono) !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: var(--text-muted) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 3px !important;
+    box-shadow: none !important;
+}
+
+.clickable-word-chip.comment-word-chip:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+    border: none !important;
+    text-decoration: underline !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* Dash lines starting with - (pure plain text line) */
@@ -332,13 +354,6 @@ button.line-title-badge:hover,
     color: #ffffff !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.45) !important;
-}
-
-.clickable-word-chip.comment-word-chip {
-    color: var(--text-muted);
-    font-style: italic;
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.05);
 }
 
 .clickable-word-chip:hover {
