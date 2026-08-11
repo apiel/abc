@@ -1,37 +1,22 @@
 {
-    "name": "PassVault v2",
-    "short_name": "PassVault",
-    "description": "Secure AES-GCM Encrypted Password Manager synced with GitHub",
-    "start_url": "./",
-    "scope": "./",
-    "display": "standalone",
-    "background_color": "#0b0f19",
-    "theme_color": "#0b0f19",
-    "orientation": "any",
-    "icons": [
-        {
-            "src": "icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ]
+  "name": "PassVault v2",
+  "short_name": "PassVault",
+  "id": "/abc/v2/",
+  "start_url": "/abc/v2/",
+  "scope": "/abc/v2/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/abc/v2/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/abc/v2/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

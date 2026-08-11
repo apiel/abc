@@ -1,9 +1,22 @@
 {
-    "name": "abc",
-    "short_name": "abc",
-    "lang": "en-US",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "white",
-    "theme_color": "white"
+  "name": "PassVault v2",
+  "short_name": "PassVault",
+  "id": "/abc/v2/",
+  "start_url": "/abc/v2/",
+  "scope": "/abc/v2/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/abc/v2/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/abc/v2/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
