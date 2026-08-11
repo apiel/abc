@@ -417,10 +417,12 @@ button.line-title-badge:hover,
 
 /* Raw Editor Mode */
 .raw-editor-container {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
 }
 
 .raw-textarea {
@@ -712,15 +714,11 @@ button.line-title-badge:hover,
         padding: 0.65rem 0.35rem;
     }
 
-    .interactive-container {
+    .interactive-container,
+    .raw-editor-container {
         padding: 0 !important;
         background: transparent !important;
         border: none !important;
-    }
-
-    .raw-editor-container {
-        padding: 0.5rem 0.35rem;
-        border-radius: var(--radius-sm);
     }
 
     .line-row {
