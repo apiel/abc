@@ -5,17 +5,6 @@ const React = fix;
 export function VaultView(): ElementNode {
     return (
         <div class="container">
-            {/* Migration Banner */}
-            <div id="migration-banner" class="migration-banner hide">
-                <div class="migration-info">
-                    <h4>⚡ Migration Available: Legacy V1 Data Found</h4>
-                    <p>Found legacy data in <code>data.yo</code> on GitHub. Click import to encrypt into <code>data2.yo</code> using AES-GCM 256-bit.</p>
-                </div>
-                <button id="btn-run-migration" class="btn btn-primary">
-                    Import to data2.yo
-                </button>
-            </div>
-
             {/* Toolbar */}
             <div class="toolbar">
                 <div class="search-box">
@@ -26,11 +15,11 @@ export function VaultView(): ElementNode {
                     <input id="search-input" type="text" class="search-input" placeholder="Filter lines or search keywords..." />
                 </div>
 
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button id="btn-toggle-edit" class="btn btn-primary">
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                    <button id="btn-toggle-edit" class="btn">
                         ✏️ Edit Plain Text
                     </button>
-                    <button id="btn-save-interactive" class="btn btn-primary hide">
+                    <button id="btn-save-interactive" class="btn btn-primary">
                         💾 Save to GitHub
                     </button>
                 </div>
@@ -38,8 +27,8 @@ export function VaultView(): ElementNode {
 
             {/* Interactive Plain Text View */}
             <div id="interactive-view" class="interactive-container">
-                <div style={{ marginBottom: '0.75rem', fontSize: '0.8rem', color: 'var(--text-dim)', display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Click any word to copy to clipboard • First word is line title</span>
+                <div style={{ marginBottom: '0.85rem', fontSize: '0.8rem', color: 'var(--text-dim)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span>First word = <strong>Highlighted Title</strong> • Click words to copy • Lines starting with <code>-</code> are plain text</span>
                     <span id="line-count-badge" style={{ fontFamily: 'var(--font-mono)' }}>0 lines</span>
                 </div>
 
@@ -52,7 +41,7 @@ export function VaultView(): ElementNode {
             <div id="raw-editor-mode" class="raw-editor-container hide">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                     <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)' }}>
-                        Plain Text Editor (One entry per line. First word = Title, subsequent words = Passwords/Usernames)
+                        Plain Text Editor (First word = Highlighted Title, <code>-</code> line = Plain text)
                     </span>
                     <button id="save-content" class="btn btn-primary">
                         💾 Save to GitHub (data2.yo)
@@ -60,7 +49,8 @@ export function VaultView(): ElementNode {
                 </div>
                 <textarea id="content" class="raw-textarea" placeholder="github user@gmail.com mySecretPass123!
 google me@gmail.com anotherPass456
-wifi MyHomeNetwork secretWifiPassword"></textarea>
+- Just a plain text note line
+# Comment line where words are copiable"></textarea>
             </div>
 
             {/* Generator Modal */}
