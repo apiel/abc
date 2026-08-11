@@ -6,10 +6,76 @@ import { initGeneratorManager } from './generatorManager';
 import { initSettings, updateStatusPill } from './Settings/settings';
 import { initVaultManager } from './vaultManager';
 
+const INACTIVITY_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+let autoLockTimer: ReturnType<typeof setTimeout> | null = null;
+let lastActivityTime = Date.now();
+
+export function performAutoLock() {
+    if (!isSessionUnlocked()) return;
+
+    lockSession();
+
+    if (autoLockTimer) {
+        clearTimeout(autoLockTimer);
+        autoLockTimer = null;
+    }
+
+    const unlockModal = elById('unlock-modal');
+    if (unlockModal) unlockModal.classList.remove('hide');
+
+    const generatorModal = elById('generator-modal');
+    if (generatorModal) generatorModal.classList.add('hide');
+
+    const settingsModal = elById('settings-modal');
+    if (settingsModal) settingsModal.classList.add('hide');
+
+    updateStatusPill('Vault Locked', false);
+    showToast('Vault auto-locked after 5 minutes of inactivity.', true);
+}
+
+export function resetInactivityTimer() {
+    lastActivityTime = Date.now();
+
+    if (autoLockTimer) {
+        clearTimeout(autoLockTimer);
+        autoLockTimer = null;
+    }
+
+    if (!isSessionUnlocked()) return;
+
+    autoLockTimer = setTimeout(() => {
+        performAutoLock();
+    }, INACTIVITY_TIMEOUT_MS);
+}
+
+function initInactivityMonitor() {
+    const activityEvents = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click'];
+    
+    activityEvents.forEach((evtName) => {
+        window.addEventListener(evtName, () => {
+            if (isSessionUnlocked()) {
+                resetInactivityTimer();
+            }
+        }, { passive: true });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && isSessionUnlocked()) {
+            const elapsed = Date.now() - lastActivityTime;
+            if (elapsed >= INACTIVITY_TIMEOUT_MS) {
+                performAutoLock();
+            } else {
+                resetInactivityTimer();
+            }
+        }
+    });
+}
+
 export function initApp() {
     initSettings();
     initVaultManager();
     initGeneratorManager();
+    initInactivityMonitor();
 
     const unlockModal = elById('unlock-modal');
     const formUnlock = elById('form-unlock');
@@ -18,6 +84,7 @@ export function initApp() {
 
     const handleUnlockSuccess = async () => {
         if (unlockModal) unlockModal.classList.add('hide');
+        resetInactivityTimer();
         updateStatusPill('Syncing data2.yo...', true);
         try {
             await loadData();
