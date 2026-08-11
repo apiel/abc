@@ -15,7 +15,7 @@ export function VaultView(): ElementNode {
                     <input id="search-input" type="text" class="search-input" placeholder="Filter lines or search keywords..." />
                 </div>
 
-                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div class="toolbar-actions" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                     <button id="btn-toggle-edit" class="btn">
                         ✏️ Edit Plain Text
                     </button>
