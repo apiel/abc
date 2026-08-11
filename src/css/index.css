@@ -246,15 +246,15 @@ body {
 .plain-text-lines {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.3rem;
 }
 
 .line-row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
     background: rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: var(--radius-sm);
@@ -266,11 +266,22 @@ body {
     border-color: var(--border-highlight);
 }
 
-/* Comment lines starting with # - Completely unformatted plain text, no boxes, no border, no italic */
+/* Empty line spacer when user has a \n between lines */
+.empty-line-spacer {
+    height: 1.25rem;
+    width: 100%;
+}
+
+/* Comment lines starting with # - Completely unformatted plain text, no boxes, no border */
 .line-row.comment-line-row {
     background: transparent !important;
     border: none !important;
-    padding: 0.35rem 0.5rem !important;
+    padding: 0.1rem 0.5rem !important;
+}
+
+/* Consecutive comment lines have NO spacing between them */
+.line-row.comment-line-row + .line-row.comment-line-row {
+    margin-top: -0.3rem;
 }
 
 .clickable-word-chip.comment-word-chip {

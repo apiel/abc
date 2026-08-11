@@ -83,7 +83,10 @@ export function renderPlainTextLines() {
     const renderedHtml = allLines
         .map((lineRaw, index) => {
             const line = lineRaw.trim();
-            if (!line) return '';
+            if (!line) {
+                if (searchQuery) return '';
+                return `<div class="empty-line-spacer" data-line-index="${index}"></div>`;
+            }
 
             if (searchQuery && !line.toLowerCase().includes(searchQuery)) {
                 return '';
