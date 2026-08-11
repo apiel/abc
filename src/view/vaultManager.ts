@@ -96,6 +96,7 @@ export function renderPlainTextLines() {
                 return `
                     <div class="line-row dash-plain-line" data-line-index="${index}">
                         <span class="dash-text-content">${escapeHtml(line)}</span>
+                        <button class="btn-edit-line" data-line-index="${index}" title="Edit line">✏️</button>
                     </div>
                 `;
             }
@@ -112,6 +113,7 @@ export function renderPlainTextLines() {
                                 </button>
                             `).join('')}
                         </div>
+                        <button class="btn-edit-line" data-line-index="${index}" title="Edit line">✏️</button>
                     </div>
                 `;
             }
@@ -136,6 +138,8 @@ export function renderPlainTextLines() {
                             `)
                             .join('') : '<span style="color: var(--text-dim); font-size: 0.8rem; font-style: italic;">(no extra words)</span>'}
                     </div>
+
+                    <button class="btn-edit-line" data-line-index="${index}" title="Edit line">✏️</button>
                 </div>
             `;
         })
@@ -171,6 +175,56 @@ export function renderPlainTextLines() {
             }
         });
     });
+
+    // Attach click event listeners to line edit buttons
+    linesContainer.querySelectorAll('.btn-edit-line').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const target = e.currentTarget as HTMLElement;
+            const lineIdxStr = target.getAttribute('data-line-index');
+            if (lineIdxStr !== null) {
+                const lineIndex = parseInt(lineIdxStr, 10);
+                switchToEditModeAtLine(lineIndex);
+            }
+        });
+    });
+}
+
+export function switchToEditModeAtLine(lineIndex: number) {
+    const toggleEditBtn = elById('btn-toggle-edit');
+    const interactiveView = elById('interactive-view');
+    const rawEditorMode = elById('raw-editor-mode');
+    const contentArea = inputById('content') as HTMLTextAreaElement;
+
+    if (!interactiveView || !rawEditorMode || !contentArea) return;
+
+    isEditingMode = true;
+    interactiveView.classList.add('hide');
+    rawEditorMode.classList.remove('hide');
+    if (toggleEditBtn) {
+        toggleEditBtn.innerText = '👁️ Interactive View';
+    }
+
+    contentArea.value = rawTextData;
+
+    const lines = rawTextData.split('\n');
+    if (lineIndex >= 0 && lineIndex < lines.length) {
+        let startPos = 0;
+        for (let i = 0; i < lineIndex; i++) {
+            startPos += lines[i].length + 1; // +1 for '\n'
+        }
+        const endPos = startPos + lines[lineIndex].length;
+
+        contentArea.focus();
+        contentArea.setSelectionRange(startPos, endPos);
+
+        const approxLineHeight = 24;
+        const paddingTop = 16;
+        const targetScrollTop = Math.max(0, (lineIndex * approxLineHeight) + paddingTop - (contentArea.clientHeight / 2));
+        contentArea.scrollTop = targetScrollTop;
+    } else {
+        contentArea.focus();
+    }
 }
 
 function escapeHtml(str: string): string {

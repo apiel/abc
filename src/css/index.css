@@ -371,6 +371,32 @@ button.line-title-badge:hover,
     transform: scale(1.05);
 }
 
+/* Edit button per line row */
+.btn-edit-line {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+.btn-edit-line:hover {
+    color: #ffffff;
+    background: rgba(99, 102, 241, 0.35);
+    border-color: rgba(129, 140, 248, 0.7);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
 /* Raw Editor Mode */
 .raw-editor-container {
     background: var(--bg-card);
