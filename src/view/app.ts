@@ -4,7 +4,7 @@ import { elById, inputById } from '../utils/dom';
 import { showToast } from '../utils/toast';
 import { initGeneratorManager } from './generatorManager';
 import { initSettings, updateStatusPill } from './Settings/settings';
-import { initVaultManager, parseAndRenderVaultData } from './vaultManager';
+import { initVaultManager } from './vaultManager';
 
 export function initApp() {
     initSettings();
@@ -14,7 +14,6 @@ export function initApp() {
     const unlockModal = elById('unlock-modal');
     const formUnlock = elById('form-unlock');
     const unlockError = elById('unlock-error');
-    const btnLock = elById('btn-lock');
     const btnUnlockConfigure = elById('btn-unlock-configure');
 
     const handleUnlockSuccess = async () => {
@@ -55,16 +54,6 @@ export function initApp() {
             } else {
                 if (unlockError) unlockError.style.display = 'block';
             }
-        };
-    }
-
-    if (btnLock) {
-        btnLock.onclick = () => {
-            lockSession();
-            parseAndRenderVaultData('');
-            if (unlockModal) unlockModal.classList.remove('hide');
-            updateStatusPill('Vault Locked', false);
-            showToast('Vault locked.');
         };
     }
 
