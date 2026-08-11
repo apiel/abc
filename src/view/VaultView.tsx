@@ -34,11 +34,6 @@ export function VaultView(): ElementNode {
 
             {/* Raw Textarea Editor Mode */}
             <div id="raw-editor-mode" class="raw-editor-container hide">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <button id="save-content" class="btn btn-primary">
-                        💾 Save to GitHub (data2.yo)
-                    </button>
-                </div>
                 <textarea id="content" class="raw-textarea" placeholder="github user@gmail.com mySecretPass123!
 google me@gmail.com anotherPass456
 - Just a plain text note line
