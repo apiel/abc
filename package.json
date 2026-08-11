@@ -7,8 +7,8 @@
     "scripts": {
         "postinstall": "husky install",
         "dev": "npx parcel src/index.html",
-        "build": "npx parcel build --public-url '.' --out-dir v2 src/index.html",
-        "build:v2": "npx parcel build --public-url '.' --out-dir v2 src/index.html"
+        "build": "npx parcel build --public-url '.' --out-dir v2 src/index.html && cp src/sw.js src/manifest.json src/icon-192.png src/icon-512.png v2/",
+        "build:v2": "npm run build"
     },
     "repository": {
         "type": "git",
