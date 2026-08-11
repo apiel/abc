@@ -1,62 +1,81 @@
-import { encrypt, decrypt } from './crypt';
+import { strongDecryptV2, strongEncryptV2 } from './crypt';
 
-interface StorageData {
+export interface StorageDataV2 {
     githubUser: string;
     githubToken: string;
     githubRepo: string;
-    secret: string;
+    masterSecret: string;
 }
 
-function store(data: StorageData) {
-    try {
-        window.localStorage.setItem('data', encrypt(JSON.stringify(data)));
-    } catch (error) {
-        console.error(error);
+const STORAGE_KEY_V2 = 'data_v2';
+let sessionPin: string | null = null;
+let cachedConfig: StorageDataV2 | null = null;
+
+export function isSessionUnlocked(): boolean {
+    return cachedConfig !== null && sessionPin !== null;
+}
+
+export function hasStoredConfig(): boolean {
+    return !!window.localStorage.getItem(STORAGE_KEY_V2);
+}
+
+export async function unlockSession(pin: string): Promise<boolean> {
+    const raw = window.localStorage.getItem(STORAGE_KEY_V2);
+    if (!raw) {
+        sessionPin = pin;
+        cachedConfig = {
+            githubUser: '',
+            githubToken: '',
+            githubRepo: '',
+            masterSecret: '',
+        };
+        return true;
     }
-}
-
-function get(): StorageData {
     try {
-        return JSON.parse(decrypt(window.localStorage.getItem('data')));
-    } catch (error) {
-        console.error(error);
+        const decrypted = await strongDecryptV2(raw, pin);
+        if (decrypted) {
+            cachedConfig = JSON.parse(decrypted);
+            sessionPin = pin;
+            return true;
+        }
+    } catch (e) {
+        console.error('Failed to unlock session:', e);
     }
+    return false;
 }
 
-export function getGithubUser() {
-    return get()?.githubUser || '';
+export function lockSession(): void {
+    sessionPin = null;
+    cachedConfig = null;
 }
 
-export function getGithubRepo() {
-    return get()?.githubRepo || '';
+export async function saveV2Config(config: StorageDataV2, pin?: string): Promise<void> {
+    const targetPin = pin || sessionPin;
+    if (!targetPin) {
+        throw new Error('Local PIN is required to encrypt storage configuration.');
+    }
+    cachedConfig = { ...config };
+    sessionPin = targetPin;
+    const encrypted = await strongEncryptV2(JSON.stringify(config), targetPin);
+    window.localStorage.setItem(STORAGE_KEY_V2, encrypted);
 }
 
-export function getGithubToken() {
-    return get()?.githubToken || '';
+export function getGithubUser(): string {
+    return cachedConfig?.githubUser || '';
 }
 
-export function getSecret() {
-    return get()?.secret || '';
+export function getGithubRepo(): string {
+    return cachedConfig?.githubRepo || '';
 }
 
-function storeItem(key: keyof StorageData, val: string) {
-    const data = get() || ({} as StorageData);
-    data[key] = val;
-    store(data);
+export function getGithubToken(): string {
+    return cachedConfig?.githubToken || '';
 }
 
-export function storeGithubUser(val: string) {
-    storeItem('githubUser', val);
+export function getMasterSecret(): string {
+    return cachedConfig?.masterSecret || '';
 }
 
-export function storeGithubRepo(val: string) {
-    storeItem('githubRepo', val);
-}
-
-export function storeGithubToken(val: string) {
-    storeItem('githubToken', val);
-}
-
-export function storeSecret(val: string) {
-    storeItem('secret', val);
+export function getSessionPin(): string {
+    return sessionPin || '';
 }

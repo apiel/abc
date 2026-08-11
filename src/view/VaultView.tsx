@@ -1,0 +1,113 @@
+import { React as fix, ElementNode } from 'async-jsx-html';
+
+const React = fix;
+
+export function VaultView(): ElementNode {
+    return (
+        <div class="container">
+            {/* Migration Banner */}
+            <div id="migration-banner" class="migration-banner hide">
+                <div class="migration-info">
+                    <h4>⚡ Migration Available: Legacy V1 Data Found</h4>
+                    <p>Found legacy data in <code>data.yo</code> on GitHub. Click import to encrypt into <code>data2.yo</code> using AES-GCM 256-bit.</p>
+                </div>
+                <button id="btn-run-migration" class="btn btn-primary">
+                    Import to data2.yo
+                </button>
+            </div>
+
+            {/* Toolbar */}
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input id="search-input" type="text" class="search-input" placeholder="Filter lines or search keywords..." />
+                </div>
+
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button id="btn-toggle-edit" class="btn btn-primary">
+                        ✏️ Edit Plain Text
+                    </button>
+                    <button id="btn-save-interactive" class="btn btn-primary hide">
+                        💾 Save to GitHub
+                    </button>
+                </div>
+            </div>
+
+            {/* Interactive Plain Text View */}
+            <div id="interactive-view" class="interactive-container">
+                <div style={{ marginBottom: '0.75rem', fontSize: '0.8rem', color: 'var(--text-dim)', display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Click any word to copy to clipboard • First word is line title</span>
+                    <span id="line-count-badge" style={{ fontFamily: 'var(--font-mono)' }}>0 lines</span>
+                </div>
+
+                <div id="plain-text-lines" class="plain-text-lines">
+                    {/* Dynamically populated line rows */}
+                </div>
+            </div>
+
+            {/* Raw Textarea Editor Mode */}
+            <div id="raw-editor-mode" class="raw-editor-container hide">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                    <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-muted)' }}>
+                        Plain Text Editor (One entry per line. First word = Title, subsequent words = Passwords/Usernames)
+                    </span>
+                    <button id="save-content" class="btn btn-primary">
+                        💾 Save to GitHub (data2.yo)
+                    </button>
+                </div>
+                <textarea id="content" class="raw-textarea" placeholder="github user@gmail.com mySecretPass123!
+google me@gmail.com anotherPass456
+wifi MyHomeNetwork secretWifiPassword"></textarea>
+            </div>
+
+            {/* Generator Modal */}
+            <div id="generator-modal" class="modal-overlay hide">
+                <div class="modal-card">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Password Generator</h3>
+                        <button id="btn-close-gen-modal" class="btn btn-icon">✕</button>
+                    </div>
+
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                            <input id="gen-output" type="text" class="form-input" readonly style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 600, color: '#10b981' }} />
+                            <button id="btn-copy-gen" class="btn btn-primary">Copy</button>
+                        </div>
+                        <div class="strength-meter">
+                            <div id="strength-bar" class="strength-bar strong"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <label class="form-label">Length: <span id="gen-length-val">16</span> characters</label>
+                        </div>
+                        <input id="gen-length" type="range" min="8" max="64" value="16" style={{ width: '100%' }} />
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginTop: '1rem' }}>
+                        <label style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <input id="gen-upper" type="checkbox" checked /> Uppercase (A-Z)
+                        </label>
+                        <label style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <input id="gen-lower" type="checkbox" checked /> Lowercase (a-z)
+                        </label>
+                        <label style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <input id="gen-digits" type="checkbox" checked /> Numbers (0-9)
+                        </label>
+                        <label style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <input id="gen-symbols" type="checkbox" checked /> Symbols (!@#$)
+                        </label>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="btn-refresh-gen" class="btn" style={{ width: '100%' }}>Regenerate Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
